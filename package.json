@@ -1,0 +1,14 @@
+{
+  "name": "movie_api",
+  "version": "1.0.0",
+  "description": "API to register notes of films",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/server.js"
+  },
+  "author": "Victor Henrique de Camargo Nestali",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
