@@ -1,8 +1,8 @@
 require("express-async-errors");
 const migrationsRun = require("./database/sqlite/migrations");
 const AppError = require("./utils/AppError")
-const express = require("express");
 
+const express = require("express");
 const routes = require("./routes");
 
 migrationsRun();
@@ -20,6 +20,8 @@ app.use((error, request, response, next) => {
       message: error.message
     })
   }
+
+  console.log(error)
 
   return response.status(500).json({
     status: "Error",
