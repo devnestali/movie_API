@@ -10,14 +10,14 @@ class MovieNotesController {
       throw new AppError('A avaliação precisa ser um número entre 1 e 5');
     }
     
-    const [movieNote_id] = await knex('movieNotes').insert({
+    await knex('movieNotes').insert({
       title,
       description,
       rating,
       user_id
     });
 
-    return response.json({ movieNote_id });
+    return response.json();
      
   }
 
@@ -27,6 +27,14 @@ class MovieNotesController {
     const movieNote = await knex('movieNotes').where({ id }).first();
 
     return response.json({ movieNote });
+  }
+
+  async delete(request, response) {
+    const { id } = request.params;
+
+    await knex('movieNotes').where({ id }).delete();
+
+    return response.json();
   }
 }
 
