@@ -14,7 +14,7 @@ class UsersController {
       throw new AppError("Este email já está cadastrado")
     }
 
-    const hashedPassword = hash(password, 8);
+    const hashedPassword = await hash(password, 8);
 
     await database.run("INSERT INTO users (name, email, password) VALUES (?, ?, ?)", [name, email, hashedPassword]);
 
