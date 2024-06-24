@@ -18,6 +18,16 @@ class MovieTagsController {
 
     return response.json();
   }
+
+  async index(request, response) {
+    const { user_id } = request.params;
+
+    const movieTags = await knex('movieTags')
+      .where({ user_id })
+      .orderBy('name');
+
+    return response.json({ movieTags });
+  }
 }
 
 module.exports = MovieTagsController;
