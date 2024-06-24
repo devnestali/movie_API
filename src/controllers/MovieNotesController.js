@@ -42,13 +42,22 @@ class MovieNotesController {
   }
 
   async index(request, response) {
-    const { user_id, title } = request.query;
-    
-    const movieNotes = await knex('movieNotes')
-      .where({ user_id })
-      .whereLike("title", `%${title}%`)
-      .orderBy("title");
+    const { user_id, title, movieTag } = request.query;
 
+    let movieNotes;
+
+    if(movieTag) {
+      const filteredTags = movieTag.split(',').map(tag => tag.trim()); 
+      
+      movieNotes = await knex('movieTags')
+        .whereIn('name', filteredTags);
+    } else {
+      movieNotes = await knex('movieNotes')
+        .where({ user_id })
+        .whereLike("title", `%${title}%`)
+        .orderBy("title");
+    }
+    
     return response.json({ movieNotes });
   }
 }
