@@ -1,5 +1,5 @@
 
-# API - NOTES 
+# API - MOVIE
 
 📽️🎞️ The movie API aims to be able to create users, register movie notes with names, description and rating, create tags for certain notes and view, delete, create and update each of the notes.
 
