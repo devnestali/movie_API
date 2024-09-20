@@ -19,6 +19,7 @@ class SessionsController {
     if(!passwordMatch) {
       throw new AppError("E-mail e/ou senha incorreta", 401);
     }
+    
     const { secret, expiresIn } = authConfig.jwt;
 
     const token = sign({}, secret, {
