@@ -3,8 +3,9 @@ const AppError = require('../utils/AppError');
 
 class MovieTagsController {
   async create(request, response) {
-    const { user_id, movie_id } = request.params;
+    const { movie_id } = request.params;
     const { name } = request.body;
+    const user_id = request.user.id;
 
     if(!name) {
       throw new AppError('O nome do gênero é obrigatório');
@@ -20,7 +21,7 @@ class MovieTagsController {
   }
 
   async index(request, response) {
-    const { user_id } = request.params;
+    const user_id = request.user.id;
 
     const movieTags = await knex('movieTags')
       .where({ user_id })

@@ -4,7 +4,7 @@ const AppError = require('../utils/AppError');
 class MovieNotesController {
   async create(request, response) {
     const { title, description, rating } = request.body;
-    const { user_id } = request.params;
+    const user_id = request.user.id;
 
     if(!rating || rating < 1 || rating > 5) {
       throw new AppError('A avaliação precisa ser um número entre 1 e 5');
@@ -42,8 +42,9 @@ class MovieNotesController {
   }
 
   async index(request, response) {
-    const { user_id, title, movieTag } = request.query;
-
+    const { title, movieTag } = request.query;
+    const user_id = request.user.id;
+    
     let movieNotes;
 
     if(movieTag) {
