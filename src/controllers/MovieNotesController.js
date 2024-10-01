@@ -69,7 +69,7 @@ class MovieNotesController {
         .orderBy("title");
     }
     
-    return response.json({ movieNotes });
+    return response.json(movieNotes);
   }
 }
 

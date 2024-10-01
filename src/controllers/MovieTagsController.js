@@ -9,7 +9,7 @@ class MovieTagsController {
       .where({ user_id })
       .groupBy('name');
 
-    return response.json({ movieTags });
+    return response.json(movieTags);
   }
 }
 
