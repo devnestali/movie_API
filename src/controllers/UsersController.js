@@ -1,6 +1,6 @@
 const { hash, compare } = require('bcryptjs'); 
 
-const knex = require('../database/knex');
+const knex = require('../database/knex')
 
 const AppError = require('../utils/AppError');
 const DataChecks = require('../utils/DataChecks');
@@ -34,8 +34,10 @@ class UsersController {
   }
 
   async update(request, response) {
-
-    return response.json();
+    return response.json({
+      status: 201,
+      message: "rota e controller funcionando!"
+    });
 
   }
 }
