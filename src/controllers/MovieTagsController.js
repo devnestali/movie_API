@@ -1,4 +1,4 @@
-const knex = require('../database/knex');
+/* const knex = require('../database/knex');
 const AppError = require('../utils/AppError');
 
 class MovieTagsController {
@@ -13,4 +13,4 @@ class MovieTagsController {
   }
 }
 
-module.exports = MovieTagsController;
+module.exports = MovieTagsController; */
