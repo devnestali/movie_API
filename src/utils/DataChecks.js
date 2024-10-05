@@ -45,7 +45,7 @@ class DataChecks {
     }
   };
 
-  isThisTheCurrentPassword(password) {
+  ThisTheCurrentPassword(password) {
     const errorMessage = "Para criar uma nova senha, é necessário informar sua senha atual! Por favor, tente novamente."
 
     this.stringCheck(password, errorMessage);
@@ -58,9 +58,21 @@ class DataChecks {
   }
 
   dataWasNotSent() {
-    const errorMessage = "Para atualizar as informações, é obrigatório fornecer pelo menos um dado";
+    const errorMessage = "Para atualizar as informações, é obrigatório fornecer pelo menos um dado.";
 
     this.stringCheck(undefined, errorMessage);
+  }
+
+  thisTitleIsEmpty(title) {
+    const errorMessage = "O título é obrigatório! Por favor, preencha o campo de titulo.";
+
+    this.stringCheck(title, errorMessage);
+  }
+
+  isANumber(value) {
+    if(isNaN(value)) {
+      throw new AppError("Apenas um valor numérico é permitido no campo de avaliação. Por favor, tente novamente.");
+    }
   }
 
 

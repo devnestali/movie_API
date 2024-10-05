@@ -2,7 +2,6 @@ const { hash, compare } = require('bcryptjs');
 
 const knex = require('../database/knex')
 
-const AppError = require('../utils/AppError');
 const DataChecks = require('../utils/DataChecks');
 const dataChecks = new DataChecks();
 
@@ -27,7 +26,7 @@ class UsersController {
       password: hashedPassword,
     });
 
-    return response.json({
+    return response.status(201).json({
       status: 201,
       message: "Usuário cadastrado com sucesso!",
     });
@@ -68,7 +67,7 @@ class UsersController {
     };
 
     if(newPassword) {
-      dataChecks.isThisTheCurrentPassword(currentPassword);
+      dataChecks.ThisTheCurrentPassword(currentPassword);
 
       const passwordCompare = await compare(currentPassword, userInfo.password);
 
@@ -94,7 +93,7 @@ class UsersController {
         avatar: updatedData.avatar,
       }
       
-      return response.json({
+      return response.status(201).json({
         status: 201,
         message: "Usuário atualizado com sucesso!",
         userUpdated,
