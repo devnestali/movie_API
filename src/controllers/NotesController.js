@@ -26,13 +26,13 @@ class NotesController {
       user_id,
     });
 
-      const tagsOfThisNote = tags.map(tag => {
-      const formattedTag = tag.trim();
+    const tagsOfThisNote = tags.map(tag => {
+    const formattedTag = tag.trim();
 
-      return {
-        note_id,
-        user_id,
-        name: formattedTag,
+    return {
+      note_id: note_id[0],
+      user_id,
+      name: formattedTag,
       };
     }); 
 
