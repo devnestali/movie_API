@@ -75,6 +75,12 @@ class DataChecks {
     }
   }
 
+  thisNoteExists(note) {
+    const errorMessage = "Nota não encontrada! Por favor, verifique as informações e tente novamente.";
+
+    this.stringCheck(note, errorMessage);
+  }
+
 
 }
 

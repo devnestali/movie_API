@@ -6,7 +6,7 @@ const dataChecks = new DataChecks();
 class NotesController {
   async create(request, response) {
     const user_id = request.user.id;
-    const { 
+    const {
       title,
       description,
       rating,
@@ -27,17 +27,17 @@ class NotesController {
     });
 
     const noteTags = tags.map(tag => {
-    const formattedTag = tag.trim();
+      const formattedTag = tag.trim();
 
-    return {
-      note_id: note_id[0],
-      user_id,
-      name: formattedTag,
+      return {
+        note_id: note_id[0],
+        user_id,
+        name: formattedTag,
       };
-    }); 
+    });
 
     await knex("tags").insert(noteTags);
-    
+
     return response.status(201).json({
       status: 201,
       message: "Nota cadastrada com sucesso!",
@@ -47,7 +47,7 @@ class NotesController {
   async update(request, response) {
     const user_id = request.user.id;
     const { id } = request.params;
-    const { 
+    const {
       title,
       description,
       rating,
@@ -72,21 +72,37 @@ class NotesController {
         const formattedTag = tag.trim();
 
         return {
-          note_id: id,
+          note_id: Number(id),
           user_id,
           name: formattedTag,
         };
       });
-
-      await knex("tags").where({ note_id: id}).delete();
-    
+      await knex("tags").where({ note_id: id }).delete();
+      
       await knex("tags").insert(noteTags);
-    }
+    } 
+
+
 
     return response.status(201).json({
       status: 201,
       message: "Nota cadastrada com sucesso!",
     })
+  }
+
+  async delete(request, response) {
+    const { id } = request.params;
+
+    const noteData = await knex("notes").where({ id }).first();
+
+    dataChecks.thisNoteExists(noteData);
+
+    await knex("notes").where({ id }).delete();
+
+    return response.status(201).json({
+      status: 201,
+      message: "Nota deletada com sucesso!",
+    });
   }
 }
 
