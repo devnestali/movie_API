@@ -6,7 +6,10 @@ const notesController = new NotesController();
 
 const ensureAuthenticated = require('../middlewares/ensureAuthenticated');
 
-notesRoutes.post('/', ensureAuthenticated, notesController.create);
+notesRoutes.use(ensureAuthenticated);
+
+notesRoutes.post('/', notesController.create);
+notesRoutes.put('/:id', notesController.update);
 
 module.exports = notesRoutes;
 
