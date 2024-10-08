@@ -104,6 +104,45 @@ class NotesController {
       message: "Nota deletada com sucesso!",
     });
   }
+
+  async index(request, response) {
+    const { title } = request.query;
+    const user_id = request.user.id;
+
+    const userNotes = await knex("notes")
+      .where({ user_id })
+      .whereLike("title", `%${title}%`)
+      .orderBy("updated_at");
+
+    const tags = await knex("tags").where({ user_id });
+    
+    const notesWithTags = userNotes.map(note => {
+      const tagsOfThisNote = tags.filter(tag => tag.note_id == note.id);
+
+      return {
+        ...note,
+        tags: tagsOfThisNote,
+      };
+    });
+    
+    return response.status(201).json(notesWithTags);
+  }
+
+  async show(request, response) {
+    const { id } = request.params;
+
+    const noteInfo = await knex("notes").where({ id }).first();
+
+    dataChecks.thisNoteExists(noteInfo);
+
+    const tagsOfThisNote = await knex("tags").where({ note_id: id });
+
+    return response.status(202).json({
+      ...noteInfo,
+      tags: tagsOfThisNote,
+    })
+
+  }
 }
 
 module.exports = NotesController;
