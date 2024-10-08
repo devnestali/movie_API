@@ -81,6 +81,12 @@ class DataChecks {
     this.stringCheck(note, errorMessage);
   }
 
+  notAuthenticated(user) {
+    const messageError = "Somente usuários autenticados podem mudar o avatar"
+
+    this.stringCheck(user, messageError);
+  }
+
 
 }
 
