@@ -18,6 +18,10 @@ class UserAvatarController {
 
     dataChecks.notAuthenticated(user);
 
+    if(user.avatar) {
+      await diskStorage.deleteFile(user.avatar);
+    }
+
     const fileName = await diskStorage.saveFile(avatarFileName);
     
     user.avatar = fileName;
