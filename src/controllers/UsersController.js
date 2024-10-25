@@ -93,11 +93,7 @@ class UsersController {
         avatar: updatedData.avatar,
       }
       
-      return response.status(201).json({
-        status: 201,
-        message: "Usuário atualizado com sucesso!",
-        userUpdated,
-      });
+      return response.status(201).json(userUpdated);
     }
     
     dataChecks.dataWasNotSent();

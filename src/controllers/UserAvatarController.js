@@ -16,8 +16,6 @@ class UserAvatarController {
       .where({ id: user_id })
       .first();
 
-    dataChecks.notAuthenticated(user);
-
     if(user.avatar) {
       await diskStorage.deleteFile(user.avatar);
     }
